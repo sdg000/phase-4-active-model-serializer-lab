@@ -3,12 +3,12 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all
-    render json: posts
+    render json: posts, each_serializer: FullPostSerializer
   end
 
   def show
     post = Post.find(params[:id])
-    render json: post
+    render json: post, serializer: FullPostSerializer
   end
 
   private
@@ -16,5 +16,4 @@ class PostsController < ApplicationController
   def render_not_found_response
     render json: { error: "Post not found" }, status: :not_found
   end
-
 end
